@@ -1,0 +1,29 @@
+p {
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 20px 0;
+    
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #0f1729;
+}
+
+.owl-mascot {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.owl-svg {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100%;
+  max-height: 100%;
+}
