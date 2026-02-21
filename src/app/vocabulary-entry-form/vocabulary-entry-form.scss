@@ -1,0 +1,75 @@
+h2 {
+  font-size: 1.5rem;
+  text-align: center;
+  background-color: #fff;
+}
+
+.form-section {
+    width: 50%;
+ margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border: 6px solid #fff;
+border-radius: 30px;
+padding: 10px;
+background-color: #fff
+}
+
+
+
+input {
+
+    background-color: #fff;
+    border-radius: 30px;
+    border: none;
+    padding: 14px;
+}
+
+label {
+    font-weight: bold;
+    font-size: small;
+}
+
+.vocabulary-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 30px;
+background-color: #fff;
+}
+
+.button-form {
+ border-radius: 20px;
+ padding: 20px;
+ background-color: #6bc04b;
+ color: #fff;
+ border: none;
+font-weight: bold;
+cursor: pointer;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: #fdf6dc;
+    padding: 10px;
+    border-radius: 20px;
+    border: 2px solid;
+    border-color: #f5d66066;
+    padding: 18px;
+}
+
+.second-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: #e6f5de;
+ border: 2px solid;
+ border-color: #6bc04b4d;
+  padding: 10px;
+  border-radius: 20px;
+   padding: 18px;
+}
