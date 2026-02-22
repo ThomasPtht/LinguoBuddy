@@ -1,6 +1,23 @@
-# Linguobuddy
+# Lingobuddy
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.4.
+App for learning english by creating collections of words and sentences/expressions. The user can add words/idioms/expressions and put them in a context by writing sentences with them. The user can then review the collections by using flashcards.
+
+LanguageTool API is used to check the sentences made by the user and alert him if there are any grammar mistakes.
+
+## Technologies Used
+
+- Angular 21
+- NestJS
+- TypeScript
+- PostgreSQL
+- Prisma
+- SCSS
+- Docker
+
+## Known Issues
+
+- P1000 Authentication Error on prisma migrate dev
+  Solution : Native PostgreSQL on Windows using port 5432. Change the port to 5433 in the docker-compose.yml and in the .env file.
 
 ## Development server
 
