@@ -13,26 +13,56 @@
 
 .expression {
     font-size: 40px;
-    font-weight: bold;
+    font-weight: 800;
     color: #333;
 }
 
 .translation {
     font-size: 18px;
+    font-weight: 500;
     color: #666;
     margin-top: 10px;
 }
 
 .badge-caterory {
-    background-color: rgb(212, 93, 177);
+    background-color: #e8579A;
     color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
+    padding: 10px 20px;
+    border-radius: 30px;
     font-size: 12px;
-   text-align: center;
+ display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    margin: 0 auto 20px auto;
+    font-size: small;
+    font-weight: bold;
+    
 }
 
 p {
     font-size: 14px;
+    font-weight: bold;
     color: rgb(108, 117, 125);
+}
+
+.back-button {
+    background-color: #fff;
+    border: none;
+    color: #1a2e35ff;
+    font-size: 16px;
+    cursor: pointer;
+    align-self: flex-start;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    padding: 10px 20px;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
+      lucide-icon {
+        display: flex;
+        align-items: center;
+    }
 }
