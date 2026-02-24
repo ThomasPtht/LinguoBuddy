@@ -10,7 +10,7 @@ LanguageTool API is used to check the sentences made by the user and alert him i
 - NestJS
 - TypeScript
 - PostgreSQL
-- Prisma
+- Prisma 6
 - SCSS
 - Docker
 

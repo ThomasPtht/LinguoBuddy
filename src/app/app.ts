@@ -4,11 +4,12 @@ import { Header } from "./header/header";
 import { VocabularyEntryForm } from './vocabulary-entry-form/vocabulary-entry-form';
 import { Collection } from './collection/collection';
 import { LucideAngularModule } from 'lucide-angular';
+import { Flashcard } from './flashcard/flashcard';
 
 
 @Component({
   selector: 'app-root',
-  imports: [ LucideAngularModule, Header, VocabularyEntryForm, Collection],
+  imports: [RouterOutlet, LucideAngularModule, Header],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
