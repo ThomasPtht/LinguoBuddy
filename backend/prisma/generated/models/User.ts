@@ -331,9 +331,9 @@ export type UserSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
 }
 
-export type UserScalarRelationFilter = {
-  is?: Prisma.UserWhereInput
-  isNot?: Prisma.UserWhereInput
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -358,10 +358,12 @@ export type UserCreateNestedOneWithoutVocabulariesInput = {
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutVocabulariesNestedInput = {
+export type UserUpdateOneWithoutVocabulariesNestedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutVocabulariesInput, Prisma.UserUncheckedCreateWithoutVocabulariesInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutVocabulariesInput
   upsert?: Prisma.UserUpsertWithoutVocabulariesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutVocabulariesInput, Prisma.UserUpdateWithoutVocabulariesInput>, Prisma.UserUncheckedUpdateWithoutVocabulariesInput>
 }

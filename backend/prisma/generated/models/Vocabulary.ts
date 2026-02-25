@@ -211,12 +211,12 @@ export type VocabularyGroupByOutputType = {
   id: number
   expression: string
   translation: string
-  contextSentence: string | null
-  category: string | null
+  contextSentence: string
+  category: string
   status: string
   createdAt: Date
   updatedAt: Date
-  userId: number
+  userId: number | null
   _count: VocabularyCountAggregateOutputType | null
   _avg: VocabularyAvgAggregateOutputType | null
   _sum: VocabularySumAggregateOutputType | null
@@ -246,25 +246,25 @@ export type VocabularyWhereInput = {
   id?: Prisma.IntFilter<"Vocabulary"> | number
   expression?: Prisma.StringFilter<"Vocabulary"> | string
   translation?: Prisma.StringFilter<"Vocabulary"> | string
-  contextSentence?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
-  category?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
+  contextSentence?: Prisma.StringFilter<"Vocabulary"> | string
+  category?: Prisma.StringFilter<"Vocabulary"> | string
   status?: Prisma.StringFilter<"Vocabulary"> | string
   createdAt?: Prisma.DateTimeFilter<"Vocabulary"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Vocabulary"> | Date | string
-  userId?: Prisma.IntFilter<"Vocabulary"> | number
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  userId?: Prisma.IntNullableFilter<"Vocabulary"> | number | null
+  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type VocabularyOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   expression?: Prisma.SortOrder
   translation?: Prisma.SortOrder
-  contextSentence?: Prisma.SortOrderInput | Prisma.SortOrder
-  category?: Prisma.SortOrderInput | Prisma.SortOrder
+  contextSentence?: Prisma.SortOrder
+  category?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
 }
 
@@ -275,25 +275,25 @@ export type VocabularyWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.VocabularyWhereInput | Prisma.VocabularyWhereInput[]
   expression?: Prisma.StringFilter<"Vocabulary"> | string
   translation?: Prisma.StringFilter<"Vocabulary"> | string
-  contextSentence?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
-  category?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
+  contextSentence?: Prisma.StringFilter<"Vocabulary"> | string
+  category?: Prisma.StringFilter<"Vocabulary"> | string
   status?: Prisma.StringFilter<"Vocabulary"> | string
   createdAt?: Prisma.DateTimeFilter<"Vocabulary"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Vocabulary"> | Date | string
-  userId?: Prisma.IntFilter<"Vocabulary"> | number
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  userId?: Prisma.IntNullableFilter<"Vocabulary"> | number | null
+  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id">
 
 export type VocabularyOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   expression?: Prisma.SortOrder
   translation?: Prisma.SortOrder
-  contextSentence?: Prisma.SortOrderInput | Prisma.SortOrder
-  category?: Prisma.SortOrderInput | Prisma.SortOrder
+  contextSentence?: Prisma.SortOrder
+  category?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.VocabularyCountOrderByAggregateInput
   _avg?: Prisma.VocabularyAvgOrderByAggregateInput
   _max?: Prisma.VocabularyMaxOrderByAggregateInput
@@ -308,77 +308,77 @@ export type VocabularyScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"Vocabulary"> | number
   expression?: Prisma.StringWithAggregatesFilter<"Vocabulary"> | string
   translation?: Prisma.StringWithAggregatesFilter<"Vocabulary"> | string
-  contextSentence?: Prisma.StringNullableWithAggregatesFilter<"Vocabulary"> | string | null
-  category?: Prisma.StringNullableWithAggregatesFilter<"Vocabulary"> | string | null
+  contextSentence?: Prisma.StringWithAggregatesFilter<"Vocabulary"> | string
+  category?: Prisma.StringWithAggregatesFilter<"Vocabulary"> | string
   status?: Prisma.StringWithAggregatesFilter<"Vocabulary"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Vocabulary"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Vocabulary"> | Date | string
-  userId?: Prisma.IntWithAggregatesFilter<"Vocabulary"> | number
+  userId?: Prisma.IntNullableWithAggregatesFilter<"Vocabulary"> | number | null
 }
 
 export type VocabularyCreateInput = {
   expression: string
   translation: string
-  contextSentence?: string | null
-  category?: string | null
+  contextSentence: string
+  category: string
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutVocabulariesInput
+  user?: Prisma.UserCreateNestedOneWithoutVocabulariesInput
 }
 
 export type VocabularyUncheckedCreateInput = {
   id?: number
   expression: string
   translation: string
-  contextSentence?: string | null
-  category?: string | null
+  contextSentence: string
+  category: string
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  userId: number
+  userId?: number | null
 }
 
 export type VocabularyUpdateInput = {
   expression?: Prisma.StringFieldUpdateOperationsInput | string
   translation?: Prisma.StringFieldUpdateOperationsInput | string
-  contextSentence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contextSentence?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutVocabulariesNestedInput
+  user?: Prisma.UserUpdateOneWithoutVocabulariesNestedInput
 }
 
 export type VocabularyUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   expression?: Prisma.StringFieldUpdateOperationsInput | string
   translation?: Prisma.StringFieldUpdateOperationsInput | string
-  contextSentence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contextSentence?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type VocabularyCreateManyInput = {
   id?: number
   expression: string
   translation: string
-  contextSentence?: string | null
-  category?: string | null
+  contextSentence: string
+  category: string
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  userId: number
+  userId?: number | null
 }
 
 export type VocabularyUpdateManyMutationInput = {
   expression?: Prisma.StringFieldUpdateOperationsInput | string
   translation?: Prisma.StringFieldUpdateOperationsInput | string
-  contextSentence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contextSentence?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -388,12 +388,12 @@ export type VocabularyUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   expression?: Prisma.StringFieldUpdateOperationsInput | string
   translation?: Prisma.StringFieldUpdateOperationsInput | string
-  contextSentence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contextSentence?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type VocabularyListRelationFilter = {
@@ -498,11 +498,19 @@ export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type VocabularyCreateWithoutUserInput = {
   expression: string
   translation: string
-  contextSentence?: string | null
-  category?: string | null
+  contextSentence: string
+  category: string
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -512,8 +520,8 @@ export type VocabularyUncheckedCreateWithoutUserInput = {
   id?: number
   expression: string
   translation: string
-  contextSentence?: string | null
-  category?: string | null
+  contextSentence: string
+  category: string
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -552,20 +560,20 @@ export type VocabularyScalarWhereInput = {
   id?: Prisma.IntFilter<"Vocabulary"> | number
   expression?: Prisma.StringFilter<"Vocabulary"> | string
   translation?: Prisma.StringFilter<"Vocabulary"> | string
-  contextSentence?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
-  category?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
+  contextSentence?: Prisma.StringFilter<"Vocabulary"> | string
+  category?: Prisma.StringFilter<"Vocabulary"> | string
   status?: Prisma.StringFilter<"Vocabulary"> | string
   createdAt?: Prisma.DateTimeFilter<"Vocabulary"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Vocabulary"> | Date | string
-  userId?: Prisma.IntFilter<"Vocabulary"> | number
+  userId?: Prisma.IntNullableFilter<"Vocabulary"> | number | null
 }
 
 export type VocabularyCreateManyUserInput = {
   id?: number
   expression: string
   translation: string
-  contextSentence?: string | null
-  category?: string | null
+  contextSentence: string
+  category: string
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -574,8 +582,8 @@ export type VocabularyCreateManyUserInput = {
 export type VocabularyUpdateWithoutUserInput = {
   expression?: Prisma.StringFieldUpdateOperationsInput | string
   translation?: Prisma.StringFieldUpdateOperationsInput | string
-  contextSentence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contextSentence?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -585,8 +593,8 @@ export type VocabularyUncheckedUpdateWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   expression?: Prisma.StringFieldUpdateOperationsInput | string
   translation?: Prisma.StringFieldUpdateOperationsInput | string
-  contextSentence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contextSentence?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -596,8 +604,8 @@ export type VocabularyUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   expression?: Prisma.StringFieldUpdateOperationsInput | string
   translation?: Prisma.StringFieldUpdateOperationsInput | string
-  contextSentence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contextSentence?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -615,7 +623,7 @@ export type VocabularySelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   createdAt?: boolean
   updatedAt?: boolean
   userId?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.Vocabulary$userArgs<ExtArgs>
 }, ExtArgs["result"]["vocabulary"]>
 
 export type VocabularySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -628,7 +636,7 @@ export type VocabularySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   createdAt?: boolean
   updatedAt?: boolean
   userId?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.Vocabulary$userArgs<ExtArgs>
 }, ExtArgs["result"]["vocabulary"]>
 
 export type VocabularySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -641,7 +649,7 @@ export type VocabularySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   createdAt?: boolean
   updatedAt?: boolean
   userId?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.Vocabulary$userArgs<ExtArgs>
 }, ExtArgs["result"]["vocabulary"]>
 
 export type VocabularySelectScalar = {
@@ -658,30 +666,30 @@ export type VocabularySelectScalar = {
 
 export type VocabularyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "expression" | "translation" | "contextSentence" | "category" | "status" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["vocabulary"]>
 export type VocabularyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.Vocabulary$userArgs<ExtArgs>
 }
 export type VocabularyIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.Vocabulary$userArgs<ExtArgs>
 }
 export type VocabularyIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.Vocabulary$userArgs<ExtArgs>
 }
 
 export type $VocabularyPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Vocabulary"
   objects: {
-    user: Prisma.$UserPayload<ExtArgs>
+    user: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     expression: string
     translation: string
-    contextSentence: string | null
-    category: string | null
+    contextSentence: string
+    category: string
     status: string
     createdAt: Date
     updatedAt: Date
-    userId: number
+    userId: number | null
   }, ExtArgs["result"]["vocabulary"]>
   composites: {}
 }
@@ -1076,7 +1084,7 @@ readonly fields: VocabularyFieldRefs;
  */
 export interface Prisma__VocabularyClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.Vocabulary$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Vocabulary$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1508,6 +1516,25 @@ export type VocabularyDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Limit how many Vocabularies to delete.
    */
   limit?: number
+}
+
+/**
+ * Vocabulary.user
+ */
+export type Vocabulary$userArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

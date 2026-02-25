@@ -26,11 +26,11 @@ model Vocabulary {
   id              Int      @id @default(autoincrement())
   expression      String
   translation     String
-  contextSentence String?
-  category        String?
+  contextSentence String
+  category        String
   status          String   @default("New")
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
-  userId          Int
-  user            User     @relation(fields: [userId], references: [id])
+  userId          Int? // nullable to allow vocabularies without a user for the seed data
+  user            User?    @relation(fields: [userId], references: [id])
 }
