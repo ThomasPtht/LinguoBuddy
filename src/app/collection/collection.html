@@ -8,11 +8,17 @@
       ></lucide-icon>
     </div>
     <h2>Your collection</h2>
-    <p>5 expressions to review</p>
-    <div class="collection-cards">
-      <div class="new">New <span>0</span></div>
-      <div class="leaning">Learning</div>
-      <div class="mastered">Mastered</div>
+    <p *ngIf="stats">{{ stats.total }} expressions to review</p>
+    <div class="collection-cards" *ngIf="stats">
+      <div class="new">
+        New <span>{{ stats.new }}</span>
+      </div>
+      <div class="leaning">
+        Learning <span>{{ stats.learning }}</span>
+      </div>
+      <div class="mastered">
+        Mastered <span>{{ stats.mastered }}</span>
+      </div>
     </div>
     <button (click)="onFlashcards()" class="collection-button">Start review</button>
   </div>

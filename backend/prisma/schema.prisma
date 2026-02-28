@@ -5,8 +5,15 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
-  output   = "./generated"
+  provider = "prisma-client-js"
+
+}
+
+enum Category {
+  Idiom
+  Expression
+  PhrasalVerb
+  Vocabulary
 }
 
 datasource db {
@@ -27,7 +34,7 @@ model Vocabulary {
   expression      String
   translation     String
   contextSentence String
-  category        String
+  category        Category
   status          String   @default("New")
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
