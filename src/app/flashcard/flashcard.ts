@@ -14,6 +14,17 @@ export class Flashcard {
     onHome() {
     this.router.navigateByUrl('');
     }
+
+    flipCard() {
+      const card = document.querySelector('.flashcard');
+      const container = document.querySelector('.flashcard-container');
+      if (card) {
+        card.classList.toggle('flipped');
+      }
+      if (container) {
+        container.classList.toggle('flipped');
+      }
+    }
 }
 
 
