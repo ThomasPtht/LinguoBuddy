@@ -1,30 +1,25 @@
+import { CommonModule } from '@angular/common';
 import { Component, NgModule } from '@angular/core';
 import { Router } from '@angular/router';
 import { ArrowLeft, LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-flashcard',
-  imports: [LucideAngularModule],
+  imports: [LucideAngularModule, CommonModule],
   templateUrl: './flashcard.html',
   styleUrl: './flashcard.scss',
 })
 export class Flashcard {
+  isFlipped = false;
   constructor(private router: Router) { }
 
-    onHome() {
+  onHome() {
     this.router.navigateByUrl('');
-    }
+  }
 
-    flipCard() {
-      const card = document.querySelector('.flashcard');
-      const container = document.querySelector('.flashcard-container');
-      if (card) {
-        card.classList.toggle('flipped');
-      }
-      if (container) {
-        container.classList.toggle('flipped');
-      }
-    }
+  flipCard() {
+    this.isFlipped = !this.isFlipped;
+  }
 }
 
 

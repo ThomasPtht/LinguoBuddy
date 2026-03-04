@@ -5,7 +5,8 @@ import { VocabularyEntryForm } from './vocabulary-entry-form/vocabulary-entry-fo
 import { Collection } from './collection/collection';
 import { LucideAngularModule } from 'lucide-angular';
 import { Flashcard } from './flashcard/flashcard';
-
+import { LoginComponent } from './login/login';
+import { RegisterComponent } from './register/register';
 
 @Component({
   selector: 'app-root',

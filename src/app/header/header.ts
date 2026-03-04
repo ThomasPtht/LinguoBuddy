@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AvatarLogin } from '../avatar-login/avatar-login';
 
 @Component({
   selector: 'app-header',
-  imports: [],
+  imports: [AvatarLogin],
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })

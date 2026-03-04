@@ -1,6 +1,6 @@
 import { ApplicationConfig, importProvidersFrom, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { LucideAngularModule, ArrowLeft, GraduationCap } from 'lucide-angular';
+import { LucideAngularModule, ArrowLeft, GraduationCap, BookOpen, RotateCcw, Trophy, User } from 'lucide-angular';
 
 import { routes } from './app.routes';
 
@@ -8,6 +8,6 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
-    importProvidersFrom(LucideAngularModule.pick({ ArrowLeft, GraduationCap   }))
+    importProvidersFrom(LucideAngularModule.pick({ ArrowLeft, GraduationCap, BookOpen, RotateCcw, Trophy, User })), 
   ],
 };

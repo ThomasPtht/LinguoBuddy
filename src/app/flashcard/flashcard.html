@@ -5,14 +5,28 @@
 <span class="badge-caterory">Idiom</span>
 
 <div class="flashcard-container">
-  <div class="flashcard" (click)="flipCard()">
-    <div class="flashcard-front">
-      <p class="expression">Break a leg</p>
-      <p class="example">Break a leg at your audition today !</p>
-      <p>Tap to reveal</p>
+  <div class="flip-card" (click)="flipCard()">
+    <div class="flip-card-inner" [class.flipped]="isFlipped">
+      <div class="flip-card-front">
+        <p class="expression">Break a leg</p>
+        <p class="example">Break a leg at your audition today !</p>
+        <p>Tap to reveal</p>
+      </div>
+      <div class="flip-card-back">
+        <p class="translation">Bonne chance pour l'audition !</p>
+        <p class="expression">Break a leg</p>
+        <p class="knowing">How well do you know this</p>
+      </div>
     </div>
-    <div class="flashcard-back">
-      <p class="translation">Bonne chance pour l'audition !</p>
-    </div>
+  </div>
+
+  <div class="details" *ngIf="isFlipped">
+    <button class="new"><lucide-icon name="rotate-ccw" size="16"></lucide-icon>New</button>
+    <button class="learning-card">
+      <lucide-icon name="book-open" color="#5B9FD6" size="16"></lucide-icon>Learning
+    </button>
+    <button class="mastered-card">
+      <lucide-icon name="trophy" color="#6BC04B" size="16"></lucide-icon>Mastered
+    </button>
   </div>
 </div>

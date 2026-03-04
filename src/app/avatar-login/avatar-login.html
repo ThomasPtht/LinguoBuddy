@@ -1,0 +1,6 @@
+<div class="avatar-container">
+  <img *ngIf="avatarUrl; else default" [src]="avatarUrl" alt="Avatar" class="avatar-img" />
+  <ng-template #default>
+    <img src="assets/default-avatar.png" alt="Avatar" class="avatar-img" />
+  </ng-template>
+</div>
