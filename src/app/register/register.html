@@ -1,16 +1,31 @@
 <div class="register-container">
   <h2>Register</h2>
-  <form>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <label for="email">Email</label>
-    <input id="email" type="email" name="email" required />
+    <input id="email" type="email" formControlName="email" />
+    <span *ngIf="email?.invalid && email?.touched">
+      <span *ngIf="email?.errors?.['required']">Email is required</span>
+      <span *ngIf="email?.errors?.['email']">Invalid email address</span>
+    </span>
 
     <label for="password">Password</label>
-    <input id="password" type="password" name="password" required />
+    <input id="password" type="password" formControlName="password" />
+    <span *ngIf="password?.invalid && password?.touched">
+      <span *ngIf="password?.errors?.['required']">Password is required</span>
+      <span *ngIf="password?.errors?.['minlength']">Minimum 6 characters</span>
+    </span>
 
     <label for="confirmPassword">Confirm password</label>
-    <input id="confirmPassword" type="password" name="confirmPassword" required />
+    <input id="confirmPassword" type="password" formControlName="confirmPassword" />
+    <span *ngIf="form.errors?.['mismatch'] && confirmPassword?.touched">
+      Passwords do not match
+    </span>
 
-    <button type="submit">Sign up</button>
+    <button type="submit" [disabled]="form.invalid || loading">
+      {{ loading ? 'Loading...' : 'Sign up' }}
+    </button>
   </form>
+
   <p>Already have an account? <a routerLink="/login">Sign in</a></p>
 </div>

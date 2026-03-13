@@ -1,9 +1,16 @@
 <div class="form-section">
   <h2>Add New expression or Word</h2>
-  <form class="vocabulary-form">
+  <form [formGroup]="vocabularyForm" class="vocabulary-form">
     <div class="form-group">
-      <label for="expressio,n">The expression/word</label>
-      <input type="text" id="word" name="word" placeholder="e.g. To call off" required />
+      <label for="expression">The expression/word</label>
+      <input
+        type="text"
+        id="expression"
+        name="expression"
+        formControlName="expression"
+        placeholder="e.g. To call off"
+        required
+      />
     </div>
 
     <div class="second-form-group">
@@ -12,6 +19,7 @@
         type="text"
         id="sentence"
         name="sentence"
+        formControlName="contextSentence"
         placeholder="Write a sentence using this expression"
         required
       />

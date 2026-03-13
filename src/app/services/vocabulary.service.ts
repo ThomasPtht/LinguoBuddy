@@ -22,4 +22,5 @@ export class VocabularyApiService {
   getStats(): Observable<VocabularyStats> {
     return this.http.get<VocabularyStats>(`${this.apiUrl}/stats`);
   }
+  
 }

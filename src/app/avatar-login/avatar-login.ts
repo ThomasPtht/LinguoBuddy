@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
-import { Input } from '@angular/core';
-import { LucideAngularModule } from 'lucide-angular';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-avatar-login',
-  imports: [LucideAngularModule],
+  imports: [],
   templateUrl: './avatar-login.html',
   styleUrl: './avatar-login.scss',
 })
 export class AvatarLogin {
-  @Input() avatarUrl?: string;
+  @Input() username?: string;
 
+  get initial(): string {
+    return this.username?.[0]?.toUpperCase() ?? '?';
+  }
 }
