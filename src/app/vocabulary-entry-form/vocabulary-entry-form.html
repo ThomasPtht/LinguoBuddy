@@ -1,16 +1,24 @@
 <div class="form-section">
   <h2>Add New expression or Word</h2>
-  <form [formGroup]="vocabularyForm" class="vocabulary-form">
+  <form [formGroup]="vocabularyForm" (ngSubmit)="onSubmit()" class="vocabulary-form">
     <div class="form-group">
       <label for="expression">The expression/word</label>
       <input
         type="text"
         id="expression"
-        name="expression"
         formControlName="expression"
         placeholder="e.g. To call off"
-        required
+        (blur)="onExpressionBlur()"
       />
+      @if (isAnalyzing) {
+        <small>⏳ Analyzing...</small>
+      }
+      @if (vocabularyForm.get('translation')?.value && !isAnalyzing) {
+        <small
+          >✓ {{ vocabularyForm.get('translation')?.value }} —
+          {{ vocabularyForm.get('category')?.value }}</small
+        >
+      }
     </div>
 
     <div class="second-form-group">
@@ -18,13 +26,13 @@
       <input
         type="text"
         id="sentence"
-        name="sentence"
         formControlName="contextSentence"
         placeholder="Write a sentence using this expression"
-        required
       />
     </div>
 
-    <button class="button-form" type="submit">Save to my Linguo !</button>
+    <button class="button-form" type="submit" [disabled]="vocabularyForm.invalid || isAnalyzing">
+      Save to my Linguo!
+    </button>
   </form>
 </div>

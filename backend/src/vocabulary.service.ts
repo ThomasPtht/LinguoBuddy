@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaClient } from '@prisma/client';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class VocabularyService {
-  private prisma = new PrismaClient();
+  constructor(private prisma: PrismaService) {}
 
   async getStats() {
     const [total, newCount, learning, mastered] = await Promise.all([
@@ -13,11 +13,18 @@ export class VocabularyService {
       this.prisma.vocabulary.count({ where: { status: 'Mastered' } }),
     ]);
 
-    return {
-      total,
-      new: newCount,
-      learning,
-      mastered,
-    };
+    return { total, new: newCount, learning, mastered };
+  }
+
+  async create(data: any) {
+    return this.prisma.vocabulary.create({
+      data: {
+        expression: data.expression,
+        translation: data.translation,
+        category: data.category,
+        contextSentence: data.contextSentence,
+        status: 'New',
+      }
+    });
   }
 }
