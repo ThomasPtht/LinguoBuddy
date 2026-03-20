@@ -15,4 +15,9 @@ export class VocabularyController {
   async create(@Body() body: any) {
     return this.vocabularyService.create(body);
   }
+
+  @Get()
+  async getAll() {
+    return this.vocabularyService.getAll(); 
+  }
 }

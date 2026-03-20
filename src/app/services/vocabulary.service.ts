@@ -1,30 +1,29 @@
-import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service'; // ← utilise PrismaService
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { firstValueFrom } from 'rxjs';
 
-@Injectable()
+export interface VocabularyStats {
+  total: number;
+  new: number;
+  learning: number;
+  mastered: number;
+}
+
+@Injectable({ providedIn: 'root' })
 export class VocabularyService {
-  constructor(private prisma: PrismaService) {} // ← inject proprement
+  private apiUrl = '/api/vocabulary'; 
 
-  async getStats() {
-    const [total, newCount, learning, mastered] = await Promise.all([
-      this.prisma.vocabulary.count(),
-      this.prisma.vocabulary.count({ where: { status: 'New' } }),
-      this.prisma.vocabulary.count({ where: { status: 'Learning' } }),
-      this.prisma.vocabulary.count({ where: { status: 'Mastered' } }),
-    ]);
+  constructor(private http: HttpClient) {}
 
-    return { total, new: newCount, learning, mastered };
+  getStats(): Promise<VocabularyStats> {
+    return firstValueFrom(this.http.get<VocabularyStats>(`${this.apiUrl}/stats`));
   }
 
-  async create(data: any) {
-    return this.prisma.vocabulary.create({
-      data: {
-        expression: data.expression,
-        translation: data.translation,
-        category: data.category,
-        contextSentence: data.contextSentence,
-        status: 'New',
-      }
-    });
+  create(data: any) {
+    return firstValueFrom(this.http.post<any>(this.apiUrl, data));
+  }
+
+  getAll(): Promise<any[]> {
+    return firstValueFrom(this.http.get<any[]>(this.apiUrl));
   }
 }

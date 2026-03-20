@@ -2,31 +2,49 @@
   <lucide-icon name="arrow-left" size="16"></lucide-icon> Back
 </button>
 
-<span class="badge-caterory">Idiom</span>
+@if (isLoading) {
+  <div class="no-cards-message">
+    <p>Chargement...</p>
+  </div>
+} @else if (currentFlashcard) {
+  <span class="badge-caterory">{{ currentFlashcard.category }}</span>
 
-<div class="flashcard-container">
-  <div class="flip-card" (click)="flipCard()">
-    <div class="flip-card-inner" [class.flipped]="isFlipped">
-      <div class="flip-card-front">
-        <p class="expression">Break a leg</p>
-        <p class="example">Break a leg at your audition today !</p>
-        <p>Tap to reveal</p>
-      </div>
-      <div class="flip-card-back">
-        <p class="translation">Bonne chance pour l'audition !</p>
-        <p class="expression">Break a leg</p>
-        <p class="knowing">How well do you know this</p>
+  <div class="flashcard-container">
+    <div class="flip-card" (click)="flipCard()">
+      <div class="flip-card-inner" [class.flipped]="isFlipped">
+        <div class="flip-card-front">
+          <p class="expression">{{ currentFlashcard.expression }}</p>
+          <p class="example">{{ currentFlashcard.example }}</p>
+          <p>Tap to reveal</p>
+        </div>
+        <div class="flip-card-back">
+          <p class="translation">{{ currentFlashcard.translation }}</p>
+          <p class="expression">{{ currentFlashcard.expression }}</p>
+          <p class="knowing">How well do you know this</p>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="details" *ngIf="isFlipped">
-    <button class="new"><lucide-icon name="rotate-ccw" size="16"></lucide-icon>New</button>
-    <button class="learning-card">
-      <lucide-icon name="book-open" color="#5B9FD6" size="16"></lucide-icon>Learning
-    </button>
-    <button class="mastered-card">
-      <lucide-icon name="trophy" color="#6BC04B" size="16"></lucide-icon>Mastered
-    </button>
+    @if (isFlipped) {
+      <div class="details">
+        <button class="new" (click)="showNewCard()">
+          <lucide-icon name="rotate-ccw" size="16"></lucide-icon>New
+        </button>
+        <button class="learning-card" (click)="showNewCard()">
+          <lucide-icon name="book-open" color="#5B9FD6" size="16"></lucide-icon>Learning
+        </button>
+        <button class="mastered-card" (click)="markMastered()">
+          <lucide-icon name="trophy" color="#6BC04B" size="16"></lucide-icon>Mastered
+        </button>
+      </div>
+    }
   </div>
-</div>
+} @else {
+  <div class="no-cards-message">
+    @if (errorMsg) {
+      <p>{{ errorMsg }}</p>
+    } @else {
+      <p>Bravo, toutes les cartes sont maîtrisées !</p>
+    }
+  </div>
+}

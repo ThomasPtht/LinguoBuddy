@@ -27,4 +27,8 @@ export class VocabularyService {
       }
     });
   }
+
+  async getAll() {
+    return this.prisma.vocabulary.findMany();
+  } 
 }
