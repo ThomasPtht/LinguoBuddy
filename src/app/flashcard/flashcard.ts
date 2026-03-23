@@ -1,14 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { VocabularyService } from '../services/vocabulary.service';
+import { VocabularyItem } from '../models/vocabulary.model';
 import { Router } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
-export interface FlashcardData {
-  expression: string;
-  translation: string;
-  example: string;
-  category: string;
-}
 
 @Component({
   selector: 'app-flashcard',
@@ -18,34 +13,38 @@ export interface FlashcardData {
 })
 export class Flashcard {
   isFlipped = false;
-  flashcards: FlashcardData[] = [];
+  flashcards: VocabularyItem[] = [];
   currentIndex = 0;
-
-  constructor(private router: Router, private vocabService: VocabularyService) { }
-
   errorMsg = '';
-
   isLoading = true;
 
-async ngOnInit() {
-  try {
-    const allCards = await this.vocabService.getAll();
-    if (!allCards || allCards.length === 0) {
-      this.errorMsg = 'Aucune carte disponible.';
-      this.flashcards = [];
-    } else {
-      this.flashcards = this.pickRandomFlashcards(allCards, 10);
-      this.currentIndex = 0;
-    }
-  } catch (e) {
-    this.errorMsg = 'Erreur lors du chargement des cartes.';
-    this.flashcards = [];
-  } finally {
-    this.isLoading = false;
-  }
-}
+  constructor(
+    private router: Router,
+    private vocabService: VocabularyService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
-  pickRandomFlashcards(cards: any[], count: number): FlashcardData[] {
+  ngOnInit() {
+    this.vocabService.getAll().subscribe({
+      next: (allCards) => {
+        if (!allCards || allCards.length === 0) {
+          this.errorMsg = 'Aucune carte disponible.';
+        } else {
+          this.flashcards = this.pickRandomFlashcards(allCards, 10);
+          this.currentIndex = 0;
+        }
+        this.isLoading = false;
+        this.cdr.detectChanges();
+      },
+      error: () => {
+        this.errorMsg = 'Erreur lors du chargement des cartes.';
+        this.isLoading = false;
+        this.cdr.detectChanges();
+      }
+    });
+  }
+
+  pickRandomFlashcards(cards: VocabularyItem[], count: number): VocabularyItem[] {
     const shuffled = [...cards];
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -79,17 +78,10 @@ async ngOnInit() {
   markMastered() {
     this.flashcards.splice(this.currentIndex, 1);
     this.isFlipped = false;
-    if (this.flashcards.length === 0) {
-      this.currentIndex = 0;
-    } else {
-      this.currentIndex = this.currentIndex % this.flashcards.length;
-    }
+    this.currentIndex = this.flashcards.length === 0 ? 0 : this.currentIndex % this.flashcards.length;
   }
 
-  get currentFlashcard(): FlashcardData {
+  get currentFlashcard(): VocabularyItem {
     return this.flashcards[this.currentIndex];
   }
 }
-
-
-    

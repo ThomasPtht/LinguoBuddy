@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
-import { VocabularyService, VocabularyStats } from '../services/vocabulary.service';
+import { VocabularyService } from '../services/vocabulary.service';
+import { VocabularyStats } from '../models/vocabulary.model';
 
 @Component({
   selector: 'app-collection',
@@ -22,15 +23,16 @@ export class Collection implements OnInit {
     this.loadStats();
   }
 
-  loadStats() {
-    this.vocabService.getStats()
-      .then((data) => {
+ loadStats() {
+    this.vocabService.getStats().subscribe({
+      next: (data) => {
         this.stats = data;
         console.log('Stats récupérées :', data);
-      })
-      .catch((err) => console.error('Erreur lors du chargement des stats', err));
+      },
+      error: (err) => console.error('Erreur lors du chargement des stats', err)
+    });
   }
-
+  
   onFlashcards() {
     this.router.navigateByUrl('flashcards');
   }
