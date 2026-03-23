@@ -1,31 +1,68 @@
-<div class="register-container">
-  <h2>Register</h2>
+<div class="register-card">
+  <div class="logo-row">
+    <div class="register-logo"></div>
+    <span class="logo-name">LinguoBuddy</span>
+  </div>
+
+  <h2>Create account</h2>
+  <p class="subtitle">Start your language journey today</p>
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <label for="email">Email</label>
-    <input id="email" type="email" formControlName="email" />
-    <span *ngIf="email?.invalid && email?.touched">
-      <span *ngIf="email?.errors?.['required']">Email is required</span>
-      <span *ngIf="email?.errors?.['email']">Invalid email address</span>
-    </span>
+    <div class="field">
+      <div class="field">
+        <label for="username">Username</label>
+        <input id="username" type="text" formControlName="username" placeholder="yourname" />
+        @if (username?.invalid && username?.touched) {
+          @if (username?.errors?.['required']) {
+            <span class="error">Username is required</span>
+          }
+          @if (username?.errors?.['minlength']) {
+            <span class="error">Minimum 3 characters</span>
+          }
+        }
+      </div>
+      <label for="email">Email</label>
+      <input id="email" type="email" formControlName="email" placeholder="you@example.com" />
+      @if (email?.invalid && email?.touched) {
+        @if (email?.errors?.['required']) {
+          <span class="error">Email is required</span>
+        }
+        @if (email?.errors?.['email']) {
+          <span class="error">Invalid email address</span>
+        }
+      }
+    </div>
 
-    <label for="password">Password</label>
-    <input id="password" type="password" formControlName="password" />
-    <span *ngIf="password?.invalid && password?.touched">
-      <span *ngIf="password?.errors?.['required']">Password is required</span>
-      <span *ngIf="password?.errors?.['minlength']">Minimum 6 characters</span>
-    </span>
+    <div class="field">
+      <label for="password">Password</label>
+      <input id="password" type="password" formControlName="password" placeholder="••••••••" />
+      @if (password?.invalid && password?.touched) {
+        @if (password?.errors?.['required']) {
+          <span class="error">Password is required</span>
+        }
+        @if (password?.errors?.['minlength']) {
+          <span class="error">Minimum 6 characters</span>
+        }
+      }
+    </div>
 
-    <label for="confirmPassword">Confirm password</label>
-    <input id="confirmPassword" type="password" formControlName="confirmPassword" />
-    <span *ngIf="form.errors?.['mismatch'] && confirmPassword?.touched">
-      Passwords do not match
-    </span>
+    <div class="field">
+      <label for="confirmPassword">Confirm password</label>
+      <input
+        id="confirmPassword"
+        type="password"
+        formControlName="confirmPassword"
+        placeholder="••••••••"
+      />
+      @if (form.errors?.['mismatch'] && confirmPassword?.touched) {
+        <span class="error">Passwords do not match</span>
+      }
+    </div>
 
     <button type="submit" [disabled]="form.invalid || loading">
       {{ loading ? 'Loading...' : 'Sign up' }}
     </button>
   </form>
 
-  <p>Already have an account? <a routerLink="/login">Sign in</a></p>
+  <p class="footer">Already have an account? <a routerLink="/login">Sign in</a></p>
 </div>

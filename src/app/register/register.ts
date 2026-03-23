@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './register.html',
+  styleUrl: './register.scss',
 })
 export class RegisterComponent {
   private fb = inject(FormBuilder);
@@ -18,6 +19,7 @@ export class RegisterComponent {
   private toastr = inject(ToastrService);
 
   form = this.fb.group({
+    username: ['', [Validators.required, Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
     confirmPassword: ['', Validators.required],
@@ -31,6 +33,7 @@ export class RegisterComponent {
     return password === confirm ? null : { mismatch: true };
   }
 
+  get username() { return this.form.get('username'); }
   get email() { return this.form.get('email'); }
   get password() { return this.form.get('password'); }
   get confirmPassword() { return this.form.get('confirmPassword'); }
@@ -39,9 +42,9 @@ export class RegisterComponent {
     if (this.form.invalid) return;
     this.loading = true;
 
-    const { email, password } = this.form.value;
+    const { username, email, password } = this.form.value;
 
-    this.authService.register(email!, password!).subscribe({
+    this.authService.register(username!, email!, password!).subscribe({
       next: () => {
         this.toastr.success('Account created!', 'Welcome 🎉');
         this.router.navigate(['']);

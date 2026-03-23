@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './login.html',
+  styleUrl: './login.scss',
 })
 export class LoginComponent {
   private fb = inject(FormBuilder);

@@ -5,41 +5,41 @@ import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/auth';
+  private readonly apiUrl = '/api/auth'; 
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  register(email: string, password: string) {
-  return this.http.post<{ access_token: string; user: any }>(
-    `${this.apiUrl}/register`,
-    { email, password }
-  ).pipe(
-    tap(res => {
-      localStorage.setItem('access_token', res.access_token);
-      localStorage.setItem('username', res.user.email); // ← ajoute
-    })
-  );
-}
+  register(username: string, email: string, password: string) {
+    return this.http.post<{ access_token: string; user: any }>(
+      `${this.apiUrl}/register`,
+      { username, email, password } 
+    ).pipe(
+      tap(res => {
+        localStorage.setItem('access_token', res.access_token);
+        localStorage.setItem('username', res.user.username ?? res.user.email);
+      })
+    );
+  }
 
-login(email: string, password: string) {
-  return this.http.post<{ access_token: string; user: any }>(
-    `${this.apiUrl}/login`,
-    { email, password }
-  ).pipe(
-    tap(res => {
-      localStorage.setItem('access_token', res.access_token);
-      localStorage.setItem('username', res.user.email); // ← ajoute
-    })
-  );
-}
+  login(email: string, password: string) {
+    return this.http.post<{ access_token: string; user: any }>(
+      `${this.apiUrl}/login`,
+      { email, password }
+    ).pipe(
+      tap(res => {
+        localStorage.setItem('access_token', res.access_token);
+        localStorage.setItem('username', res.user.username ?? res.user.email);
+      })
+    );
+  }
 
-logout() {
-  localStorage.removeItem('access_token');
-  localStorage.removeItem('username'); // ← ajoute
-  this.router.navigate(['/login']);
-}
+  logout() {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('username');
+    this.router.navigate(['/login']);
+  }
 
-  getToken() {
+  getToken(): string | null {
     return localStorage.getItem('access_token');
   }
 
@@ -48,6 +48,6 @@ logout() {
   }
 
   getUsername(): string {
-  return localStorage.getItem('username') ?? '';
-}
+    return localStorage.getItem('username') ?? '';
+  }
 }
