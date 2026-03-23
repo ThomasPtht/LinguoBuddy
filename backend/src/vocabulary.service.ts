@@ -16,7 +16,7 @@ export class VocabularyService {
     return { total, new: newCount, learning, mastered };
   }
 
-  async create(data: any) {
+  async createVocabulary(data: any) {
     return this.prisma.vocabulary.create({
       data: {
         expression: data.expression,

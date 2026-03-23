@@ -2,7 +2,7 @@ export interface VocabularyItem {
   id?: number | string;
   expression: string;
   translation: string;
-  example: string;
+  contextSentence: string;
   category: string;
   status?: 'new' | 'learning' | 'mastered';
 }
@@ -13,3 +13,4 @@ export interface VocabularyStats {
   learning: number;
   mastered: number;
 }
+

@@ -13,7 +13,7 @@ export class VocabularyController {
 
   @Post()
   async create(@Body() body: any) {
-    return this.vocabularyService.create(body);
+    return this.vocabularyService.createVocabulary(body);
   }
 
   @Get()

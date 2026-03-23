@@ -29,6 +29,22 @@
         formControlName="contextSentence"
         placeholder="Write a sentence using this expression"
       />
+      @if (isChecking) {
+        <small>⏳ Checking your sentence...</small>
+      }
+      @if (checkResult && !isChecking) {
+        <div
+          class="check-result"
+          [class.correct]="checkResult.isCorrect"
+          [class.incorrect]="!checkResult.isCorrect"
+        >
+          <p>{{ checkResult.isCorrect ? '✅ Correct!' : '❌ Not quite' }}</p>
+          <p>{{ checkResult.feedback }}</p>
+          @if (!checkResult.isCorrect) {
+            <p><strong>Correction :</strong> {{ checkResult.correctedSentence }}</p>
+          }
+        </div>
+      }
     </div>
 
     <button class="button-form" type="submit" [disabled]="vocabularyForm.invalid || isAnalyzing">

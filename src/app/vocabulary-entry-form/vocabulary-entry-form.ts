@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
-import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Component, inject, OnInit } from '@angular/core';
+import { FormBuilder, Validators, ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
+import { debounceTime, distinctUntilChanged, filter } from 'rxjs';
+import { VocabularyService } from '../services/vocabulary.service';
 
 @Component({
   selector: 'app-vocabulary-entry-form',
@@ -10,25 +12,36 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './vocabulary-entry-form.html',
   styleUrl: './vocabulary-entry-form.scss',
 })
-export class VocabularyEntryForm {
+export class VocabularyEntryForm implements OnInit {
   private fb = inject(FormBuilder);
   private http = inject(HttpClient);
   private toastr = inject(ToastrService);
+  private vocabService = inject(VocabularyService);
 
-  private apiUrl = 'http://localhost:3000';
+
+  private readonly apiUrl = '/api'; // ← proxy
 
   isAnalyzing = false;
   isChecking = false;
   checkResult: { isCorrect: boolean; feedback: string; correctedSentence: string } | null = null;
 
-  vocabularyForm = this.fb.group({
-    expression: ['', Validators.required],
-    translation: ['', Validators.required],
-    category: ['', Validators.required],
-    contextSentence: ['', Validators.required],
-  });
+ vocabularyForm = new FormGroup({
+  expression: new FormControl('', { nonNullable: true, validators: Validators.required }),
+  translation: new FormControl('', { nonNullable: true, validators: Validators.required }),
+  contextSentence: new FormControl('', { nonNullable: true, validators: Validators.required }),
+  category: new FormControl('', { nonNullable: true, validators: Validators.required }),
+});
 
-  // Appelé quand le user quitte le champ expression
+  ngOnInit() {
+    this.vocabularyForm.get('contextSentence')?.valueChanges.pipe(
+      debounceTime(1000),
+      distinctUntilChanged(),
+      filter(val => !!val && val.length > 5)
+    ).subscribe(() => {
+      this.onCheckSentence();
+    });
+  }
+
   onExpressionBlur() {
     const expression = this.vocabularyForm.get('expression')?.value;
     if (!expression) return;
@@ -53,7 +66,6 @@ export class VocabularyEntryForm {
     });
   }
 
-  // Vérifie la phrase du user
   onCheckSentence() {
     const expression = this.vocabularyForm.get('expression')?.value;
     const sentence = this.vocabularyForm.get('contextSentence')?.value;
@@ -79,7 +91,9 @@ export class VocabularyEntryForm {
   onSubmit() {
     if (this.vocabularyForm.invalid) return;
 
-    this.http.post(`${this.apiUrl}/vocabulary`, this.vocabularyForm.value).subscribe({
+    const vocabData = this.vocabularyForm.getRawValue();
+
+    this.vocabService.create(vocabData).subscribe({
       next: () => {
         this.toastr.success('Expression saved!', 'Success 🎉');
         this.vocabularyForm.reset();
