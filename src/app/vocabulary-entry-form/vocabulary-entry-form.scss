@@ -73,3 +73,30 @@ cursor: pointer;
   border-radius: 20px;
    padding: 18px;
 }
+
+.error {
+  color: #e05c5c;
+  font-size: 12px;
+}
+
+.analyzing {
+  color: #888;
+  font-size: 12px;
+}
+
+.success-hint {
+  color: #6bc04b;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.check-result {
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  font-size: 14px;
+
+  p { margin: 0.25rem 0; }
+
+  &.correct { background: #e6f7f0; color: #1a6b4a; }
+  &.incorrect { background: #fdecea; color: #9b2335; }
+}

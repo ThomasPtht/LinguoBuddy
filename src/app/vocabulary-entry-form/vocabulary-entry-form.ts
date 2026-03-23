@@ -89,6 +89,7 @@ export class VocabularyEntryForm implements OnInit {
   }
 
   onSubmit() {
+    this.vocabularyForm.markAllAsTouched();
     if (this.vocabularyForm.invalid) return;
 
     const vocabData = this.vocabularyForm.getRawValue();
