@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, NgZone, inject } from '@angular/core';
 import { VocabularyService } from '../services/vocabulary.service';
 import { VocabularyItem } from '../models/vocabulary.model';
+import { StreakService } from '../services/streak.service';
 import { Router } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
 
@@ -18,30 +19,46 @@ export class Flashcard {
   errorMsg = '';
   isLoading = true;
 
-  constructor(
-    private router: Router,
-    private vocabService: VocabularyService,
-    private cdr: ChangeDetectorRef
-  ) {}
+  private cardsReviewed = 0;
+  private readonly DAILY_GOAL = 10;
+  private streakUpdated = false;
+
+  private router = inject(Router);
+  private vocabService = inject(VocabularyService);
+  private streakService = inject(StreakService);
+  private cdr = inject(ChangeDetectorRef);
+  private ngZone = inject(NgZone);
 
   ngOnInit() {
     this.vocabService.getAll().subscribe({
       next: (allCards) => {
-        if (!allCards || allCards.length === 0) {
-          this.errorMsg = 'Aucune carte disponible.';
-        } else {
-          this.flashcards = this.pickRandomFlashcards(allCards, 10);
-          this.currentIndex = 0;
-        }
-        this.isLoading = false;
-        this.cdr.detectChanges();
+        this.ngZone.run(() => {
+          if (!allCards || allCards.length === 0) {
+            this.errorMsg = 'Aucune carte disponible.';
+          } else {
+            this.flashcards = this.pickRandomFlashcards(allCards, 10);
+            this.currentIndex = 0;
+          }
+          this.isLoading = false;
+          this.cdr.detectChanges();
+        });
       },
       error: () => {
-        this.errorMsg = 'Erreur lors du chargement des cartes.';
-        this.isLoading = false;
-        this.cdr.detectChanges();
+        this.ngZone.run(() => {
+          this.errorMsg = 'Erreur lors du chargement des cartes.';
+          this.isLoading = false;
+          this.cdr.detectChanges();
+        });
       }
     });
+  }
+
+  private checkDailyGoal() {
+    this.cardsReviewed++;
+    if (this.cardsReviewed >= this.DAILY_GOAL && !this.streakUpdated) {
+      this.streakUpdated = true;
+      this.streakService.updateStreak().subscribe();
+    }
   }
 
   pickRandomFlashcards(cards: VocabularyItem[], count: number): VocabularyItem[] {
@@ -70,12 +87,14 @@ export class Flashcard {
 
   showNewCard() {
     this.isFlipped = false;
+    this.checkDailyGoal();
     if (this.flashcards.length > 1) {
       this.currentIndex = (this.currentIndex + 1) % this.flashcards.length;
     }
   }
 
   markMastered() {
+    this.checkDailyGoal();
     this.flashcards.splice(this.currentIndex, 1);
     this.isFlipped = false;
     this.currentIndex = this.flashcards.length === 0 ? 0 : this.currentIndex % this.flashcards.length;
