@@ -13,11 +13,53 @@ LanguageTool API is used to check the sentences made by the user and alert him i
 - Prisma 6
 - SCSS
 - Docker
+- Gemini
+
+## Architecture
+
+The application follows a modular architecture, with a clear separation of concerns between the frontend and backend. The frontend is built using Angular, which provides a responsive and interactive user interface. The backend is developed using NestJS, which offers a robust and scalable server-side framework. The application is structured into modules, services, and controllers, allowing for maintainability and scalability.
+We have services for vocabulary management, user authentication, and integration with the Gemini API.
 
 ## Known Issues
 
 - P1000 Authentication Error on prisma migrate dev
   Solution : Native PostgreSQL on Windows using port 5432. Change the port to 5433 in the docker-compose.yml and in the .env file.
+
+## Prisma & database
+
+The application uses Prisma as an ORM to interact with a PostgreSQL database. The database schema is defined in the `prisma/schema.prisma` file, which includes models for users, vocabulary entries.
+Prisma Migrate is used to manage database migrations, allowing for easy schema changes and version control. The application also includes seed scripts to populate the database with initial data for testing and development purposes.
+
+PostgreSQl is set up using Docker for easy local development.
+
+## Auth
+
+The application uses a simple authentication system based on JWT tokens. The user can register and login to access their vocabulary collections. The authentication state is managed using Angular's built-in services and guards to protect routes that require authentication.
+
+- The backend uses NestJS's Passport module to handle authentication and authorization. Passwords are hashed using bcrypt before being stored in the database.
+
+## Gemini Integration
+
+The application integrates with Google's Gemini API to provide advanced language processing capabilities. This allows for features such as grammar checking, sentence correction, and feedback on user input. The integration is handled through a dedicated service in the backend, which communicates with the Gemini API and processes the responses to provide meaningful feedback to the user.
+
+- The frontend sends user input to the backend, which then interacts with the Gemini API to analyze the sentences and return feedback on grammar and correctness. This enhances the learning experience by providing real-time feedback on the user's language usage.
+
+## API
+
+The backend exposes a RESTful API for managing vocabulary entries, collections, and user authentication. The API endpoints are protected using JWT authentication, ensuring that only authenticated users can access their data. The API follows standard REST conventions, making it easy to integrate with the frontend and any future clients.
+Services are organized into modules, and controllers handle incoming requests, delegating business logic to services. The API also includes error handling and validation to ensure data integrity.
+
+## Testing
+
+In building ...
+
+## Security
+
+- Passwords are securely hashed using bcrypt before being stored in the database.
+- JWT tokens are used for authentication, and sensitive routes are protected using guards to ensure that only authenticated users can access them.
+- CORS is configured to allow requests only from trusted origins, enhancing security against cross-origin attacks.
+
+## Deployment
 
 ## Development server
 
