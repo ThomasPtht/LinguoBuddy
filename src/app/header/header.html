@@ -40,5 +40,10 @@
     <h1 (click)="onHome()">LingoBuddy</h1>
   </div>
   <app-streak [streakCount]="streakCount" />
-  <app-avatar-login [username]="username"></app-avatar-login>
+  <app-avatar-login [username]="username" (avatarClick)="onAvatarClicked()"></app-avatar-login>
+  @if (showLogout) {
+    <div class="logout-popup">
+      <button (click)="logout()">Se déconnecter</button>
+    </div>
+  }
 </div>

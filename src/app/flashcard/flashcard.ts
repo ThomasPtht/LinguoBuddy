@@ -57,10 +57,13 @@ export class Flashcard {
   }
 
   private checkDailyGoal() {
-    this.cardsReviewed++;
-    if (this.cardsReviewed >= this.DAILY_GOAL && !this.streakUpdated) {
-      this.streakUpdated = true;
-      this.streakService.updateStreak().subscribe();
+    if (this.cardsReviewed < this.DAILY_GOAL) {
+      this.cardsReviewed++;
+      if (this.cardsReviewed === this.DAILY_GOAL && !this.streakUpdated) {
+        this.streakUpdated = true;
+        this.streakService.updateStreak().subscribe();
+        this.toastr.success('Session is complete ! Keep it up like this !');
+      }
     }
   }
 
@@ -103,7 +106,8 @@ export class Flashcard {
     this.currentIndex = this.flashcards.length === 0 ? 0 : this.currentIndex % this.flashcards.length;
   }
 
-  get currentFlashcard(): VocabularyItem {
+  get currentFlashcard(): VocabularyItem | null {
+    if (this.cardsReviewed >= this.DAILY_GOAL) return null;
     return this.flashcards[this.currentIndex];
   }
 

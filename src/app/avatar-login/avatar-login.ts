@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-avatar-login',
@@ -8,8 +8,13 @@ import { Component, Input } from '@angular/core';
 })
 export class AvatarLogin {
   @Input() username?: string;
+  @Output() avatarClick = new EventEmitter<void>();
 
   get initial(): string {
     return this.username?.[0]?.toUpperCase() ?? '?';
+  }
+
+  onAvatarClick() {
+    this.avatarClick.emit();
   }
 }

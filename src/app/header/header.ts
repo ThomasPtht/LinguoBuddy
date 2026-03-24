@@ -14,6 +14,7 @@ import { Streak } from "../streak/streak";
 export class Header implements OnInit {
   username = '';
   streakCount = 0;
+  showLogout = false;
 
   private router = inject(Router);
   private authService = inject(AuthService);
@@ -40,5 +41,14 @@ export class Header implements OnInit {
 
   onHome() {
     this.router.navigateByUrl('');
+  }
+
+  onAvatarClicked() {
+    this.showLogout = !this.showLogout;
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigateByUrl('/login');
   }
 }

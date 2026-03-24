@@ -24,7 +24,7 @@
         <div class="flip-card-front">
           <p class="expression">{{ currentFlashcard.expression }}</p>
           <p class="example">{{ currentFlashcard.contextSentence }}</p>
-          <p>Tap to reveal</p>
+          <p class="tap-reveal">Tap to reveal</p>
         </div>
         <div class="flip-card-back">
           <p class="translation">{{ currentFlashcard.translation }}</p>
@@ -56,6 +56,10 @@
         </button>
       </div>
     }
+  </div>
+} @else if (cardsReviewedPublic >= dailyGoalPublic) {
+  <div class="no-cards-message">
+    <p>🎉 Revision complete !</p>
   </div>
 } @else {
   <div class="no-cards-message">
