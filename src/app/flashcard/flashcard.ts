@@ -5,6 +5,7 @@ import { VocabularyItem } from '../models/vocabulary.model';
 import { StreakService } from '../services/streak.service';
 import { Router } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-flashcard',
@@ -18,6 +19,8 @@ export class Flashcard {
   currentIndex = 0;
   errorMsg = '';
   isLoading = true;
+
+  private toastr = inject(ToastrService);
 
   private cardsReviewed = 0;
   private readonly DAILY_GOAL = 10;
@@ -102,5 +105,37 @@ export class Flashcard {
 
   get currentFlashcard(): VocabularyItem {
     return this.flashcards[this.currentIndex];
+  }
+
+  // Ajouté pour la barre de progression
+  get progress(): number {
+    return Math.min(this.cardsReviewed / this.DAILY_GOAL, 1);
+  }
+
+  get cardsReviewedPublic(): number {
+    return this.cardsReviewed;
+  }
+
+  get dailyGoalPublic(): number {
+    return this.DAILY_GOAL;
+  }
+
+  onDeleteById(id: number) {
+    if (confirm('Are you sure you want to delete this item?')) {
+      this.vocabService.deleteById(id).subscribe({
+        next: () => {
+        this.flashcards = this.flashcards.filter(card => card.id !== id);
+        this.isFlipped = false;
+        this.currentIndex = this.flashcards.length === 0 ? 0 : this.currentIndex % this.flashcards.length;
+        this.cdr.detectChanges();
+        this.toastr.success('Item deleted successfully');
+        },
+        
+        error: (err) => {
+          console.error('Error deleting item:', err);
+          this.toastr.error('Failed to delete item');
+        }
+      });
+    }
   }
 }

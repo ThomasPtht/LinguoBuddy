@@ -1,6 +1,6 @@
 import { ApplicationConfig, importProvidersFrom, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { LucideAngularModule, ArrowLeft, GraduationCap, BookOpen, RotateCcw, Trophy, User } from 'lucide-angular';
+import { LucideAngularModule, ArrowLeft, GraduationCap, BookOpen, RotateCcw, Trophy, User, Trash } from 'lucide-angular';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
@@ -19,6 +19,6 @@ export const appConfig: ApplicationConfig = {
       positionClass: 'toast-top-right',
       preventDuplicates: true,
     }),
-    importProvidersFrom(LucideAngularModule.pick({ ArrowLeft, GraduationCap, BookOpen, RotateCcw, Trophy, User })),
+    importProvidersFrom(LucideAngularModule.pick({ ArrowLeft, GraduationCap, BookOpen, RotateCcw, Trophy, User, Trash })),
   ],
 };

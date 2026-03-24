@@ -7,9 +7,18 @@
     <p>Chargement...</p>
   </div>
 } @else if (currentFlashcard) {
-  <span class="badge-caterory">{{ currentFlashcard.category }}</span>
+  <div class="badge-category-container">
+    <span class="badge-category">{{ currentFlashcard.category }}</span>
+  </div>
 
   <div class="flashcard-container">
+    <div class="progress-bar-container">
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" [style.width]="progress * 100 + '%'"></div>
+      </div>
+      <span class="progress-label">{{ cardsReviewedPublic }}/{{ dailyGoalPublic }}</span>
+    </div>
+
     <div class="flip-card" (click)="flipCard()">
       <div class="flip-card-inner" [class.flipped]="isFlipped">
         <div class="flip-card-front">
@@ -21,6 +30,15 @@
           <p class="translation">{{ currentFlashcard.translation }}</p>
           <p class="expression">{{ currentFlashcard.expression }}</p>
           <p class="knowing">How well do you know this</p>
+          <button
+            class="delete-btn"
+            (click)="
+              onDeleteById(currentFlashcard.id ? +currentFlashcard.id : 0); $event.stopPropagation()
+            "
+            title="Supprimer"
+          >
+            <lucide-icon name="trash" size="12" color="#e74c3c"></lucide-icon>
+          </button>
         </div>
       </div>
     </div>

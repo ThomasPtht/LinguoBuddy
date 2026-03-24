@@ -20,4 +20,8 @@ export class VocabularyService {
  getAll(): Observable<VocabularyItem[]> {
     return this.http.get<VocabularyItem[]>(this.apiUrl);
   }
+
+ deleteById(id: number) {
+  return this.http.delete(`/api/vocabulary/${id}`);
+}
 }

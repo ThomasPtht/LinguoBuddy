@@ -31,4 +31,8 @@ export class VocabularyService {
   async getAll() {
     return this.prisma.vocabulary.findMany();
   } 
+
+  async deleteById(id: number) {
+    return this.prisma.vocabulary.delete({ where: { id } });
+  }
 }

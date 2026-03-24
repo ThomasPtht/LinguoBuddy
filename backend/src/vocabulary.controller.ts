@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Delete, Param } from '@nestjs/common';
 import { VocabularyService } from './vocabulary.service';
 
 
@@ -20,4 +20,9 @@ export class VocabularyController {
   async getAll() {
     return this.vocabularyService.getAll(); 
   }
+
+@Delete(':id')
+async deleteById(@Param('id') id: string) {
+  return this.vocabularyService.deleteById(Number(id));
+}
 }

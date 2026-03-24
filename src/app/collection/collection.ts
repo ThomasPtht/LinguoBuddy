@@ -5,6 +5,7 @@ import { LucideAngularModule } from 'lucide-angular';
 import { VocabularyService } from '../services/vocabulary.service';
 import { VocabularyStats } from '../models/vocabulary.model';
 
+
 @Component({
   selector: 'app-collection',
   imports: [LucideAngularModule, CommonModule],
@@ -43,4 +44,6 @@ export class Collection implements OnInit {
   onFlashcards() {
     this.router.navigateByUrl('flashcards');
   }
+
+  
 }
