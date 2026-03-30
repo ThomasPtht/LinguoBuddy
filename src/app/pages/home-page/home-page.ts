@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { VocabularyEntryForm } from '../vocabulary-entry-form/vocabulary-entry-form';
-import { Collection } from '../collection/collection';
+import { VocabularyEntryForm } from '../../vocabulary-entry-form/vocabulary-entry-form';
+import { Collection } from '../../collection/collection';
 
 @Component({
   selector: 'app-home-page',
