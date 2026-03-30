@@ -20,4 +20,10 @@ describe('Header', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render title', () => {
+    const compiled = fixture.nativeElement
+    expect(compiled.querySelector('.h1')?.textContent).toContain('LingoBuddy');
+  })
+
 });
