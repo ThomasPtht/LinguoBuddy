@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
-import { Flashcard } from './flashcard/flashcard';
+import { Flashcard } from './pages/flashcard/flashcard';
 import { HomePage } from './pages/home-page/home-page';
-import { LoginComponent } from './login/login';
-import { RegisterComponent } from './register/register';
+import { LoginComponent } from './pages/login/login';
+import { RegisterComponent } from './pages/register/register';
 import { authGuard } from './auth/auth.guard'; // ← ajoute
 import { FlashcardPage } from './pages/flashcard-page/flashcard-page';
 import { NotFoundPage } from './pages/not-found-page/not-found-page';

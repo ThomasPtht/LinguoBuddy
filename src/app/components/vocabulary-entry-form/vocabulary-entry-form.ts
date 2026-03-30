@@ -4,7 +4,7 @@ import { FormBuilder, Validators, ReactiveFormsModule, FormGroup, FormControl } 
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs';
-import { VocabularyService } from '../services/vocabulary.service';
+import { VocabularyService } from '../../services/vocabulary.service';
 
 @Component({
   selector: 'app-vocabulary-entry-form',

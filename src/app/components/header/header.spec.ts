@@ -22,8 +22,13 @@ describe('Header', () => {
   });
 
   it('should render title', () => {
-    const compiled = fixture.nativeElement
+    const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('.h1')?.textContent).toContain('LingoBuddy');
   })
+
+  it('should render avatar', () => {
+    const compiled = fixture.nativeElement
+    expect(compiled.querySelector('img')?.getAttribute('src')).toBe('/assets/avatar.png');
+  });
 
 });

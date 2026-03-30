@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
-import { VocabularyService } from '../services/vocabulary.service';
-import { VocabularyStats } from '../models/vocabulary.model';
+import { VocabularyService } from '../../services/vocabulary.service';
+import { VocabularyStats } from '../../models/vocabulary.model';
 
 
 @Component({

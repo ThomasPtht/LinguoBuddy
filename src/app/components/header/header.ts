@@ -1,8 +1,8 @@
 import { Component, inject, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { AvatarLogin } from '../avatar-login/avatar-login';
-import { AuthService } from '../services/auth.service';
-import { StreakService } from '../services/streak.service';
+import { AuthService } from '../../services/auth.service';
+import { StreakService } from '../../services/streak.service';
 import { Streak } from "../streak/streak";
 
 @Component({

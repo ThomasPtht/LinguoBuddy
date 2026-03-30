@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { Header } from "./header/header";
+import { Header } from "./components/header/header";
 import { LucideAngularModule } from 'lucide-angular';
 
 @Component({

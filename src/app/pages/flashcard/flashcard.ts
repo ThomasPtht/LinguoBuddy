@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, ChangeDetectorRef, NgZone, inject } from '@angular/core';
-import { VocabularyService } from '../services/vocabulary.service';
-import { VocabularyItem } from '../models/vocabulary.model';
-import { StreakService } from '../services/streak.service';
+import { VocabularyService } from '../../services/vocabulary.service';
+import { VocabularyItem } from '../../models/vocabulary.model';
+import { StreakService } from '../../services/streak.service';
 import { Router } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
 import { ToastrService } from 'ngx-toastr';
