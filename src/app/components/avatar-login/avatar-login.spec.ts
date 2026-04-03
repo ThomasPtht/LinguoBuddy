@@ -20,4 +20,9 @@ describe('AvatarLogin', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should return initial from username', () => {
+    component.username = 'John Doe';
+    expect(component.initial).toBe('JD');
+  });
 });
